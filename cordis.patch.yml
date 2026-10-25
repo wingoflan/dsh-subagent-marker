@@ -1,0 +1,17 @@
+# Bundle patch for dsh-subagent-marker.
+#
+# A top-level YAML array of loader patch entries. The profile composes one list
+# from every bundle in `dsh.profile.bundles`, in bundle order, then overlays the
+# profile's own cordis.patch.yml.
+#
+# The row mounts the Node half as a host plugin; its `name` is a bare package
+# name resolved through the profile's node_modules. The browser half joins the
+# client module graph on its own: this package declares `dsh.client`
+# (platform: web) and exports "./client", so dsh-client-modules serves
+# client.js to the page.
+#
+# To switch the marker off without uninstalling, copy this row into the
+# profile's cordis.patch.yml and either delete the row or add `disabled: true`.
+- insert:
+    - id: subagent-marker
+      name: dsh-subagent-marker

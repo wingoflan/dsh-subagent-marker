@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Subagent Marker",
+    "description": "Shows a small subagent pill in a subagent session's composer; root sessions render nothing."
+  }
+}
