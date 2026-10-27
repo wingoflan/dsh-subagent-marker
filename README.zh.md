@@ -8,6 +8,8 @@
 
 [English](README.md) | [中文](README.zh.md)
 
+![子代理会话输入框里的 subagent 标识](https://raw.githubusercontent.com/wingoflan/dsh-subagent-marker/main/assets/screenshot.png)
+
 ## 功能
 
 - 只在当前会话是子代理时渲染标记。主会话不渲染任何东西，工具行保持原来的布局和间距。

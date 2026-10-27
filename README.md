@@ -6,6 +6,8 @@ A subagent session's composer looks exactly like a root session's. This plugin a
 
 [English](README.md) | [中文](README.zh.md)
 
+![The subagent marker in a subagent session's composer](https://raw.githubusercontent.com/wingoflan/dsh-subagent-marker/main/assets/screenshot.png)
+
 ## What it does
 
 - Renders the marker only when the open session is a subagent. Root sessions get nothing, so the row keeps its original layout and spacing.
