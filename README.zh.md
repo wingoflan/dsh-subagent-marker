@@ -2,7 +2,11 @@
 
 **给 DeepSeek Harness 子代理会话的输入框加标识。**
 
-子代理会话和主会话的输入框长得一模一样。这个插件在输入框底部工具行的左端加一个 `subagent` 标识，让你知道自己在往哪个会话里打字。
+沟槽的dsh UI设计，一晚上好几次在查看subagent内容之后误输入prompt给subagent，浪费数百K token，一怒之下遂跑了这么个插件。
+
+只加了个标签，其他什么都没干。大概不会影响其他插件。
+
+[English](README.md) | [中文](README.zh.md)
 
 ## 功能
 

@@ -2,5 +2,5 @@ node_modules/
 .dsh_temp/
 *.tgz
 
-# Local design notes, not part of the package.
-subagent-marker.md
+# Local notes, not part of the package.
+*.local.md

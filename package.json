@@ -22,9 +22,21 @@
     "LICENSE"
   ],
   "license": "MIT",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "cordis",
+    "subagent",
+    "composer"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wingoflan/dsh-subagent-marker.git"
+  },
+  "homepage": "https://github.com/wingoflan/dsh-subagent-marker#readme",
+  "bugs": {
+    "url": "https://github.com/wingoflan/dsh-subagent-marker/issues"
   },
   "dsh": {
     "bundle": {

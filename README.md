@@ -4,6 +4,8 @@
 
 A subagent session's composer looks exactly like a root session's. This plugin adds a `subagent` marker at the left end of the composer's tool row, so you can tell which one you are typing into.
 
+[English](README.md) | [中文](README.zh.md)
+
 ## What it does
 
 - Renders the marker only when the open session is a subagent. Root sessions get nothing, so the row keeps its original layout and spacing.
