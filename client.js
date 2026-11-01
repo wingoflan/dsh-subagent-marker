@@ -1,9 +1,9 @@
 /**
  * Browser half of dsh-subagent-marker.
  *
- * Registers one entry into the composer's left tool-row slot and renders a
+ * Registers one entry into the composer's right control cluster and renders a
  * small marker when the open session is a subagent. Root sessions render
- * nothing, so the row keeps its original layout there.
+ * nothing, so the cluster keeps its original layout there.
  *
  * Hand-written `__ModuleLoader__` package shell: no build step, so editing this
  * file is editing what the browser receives.
@@ -17,8 +17,8 @@ window.__ModuleLoader__.load({
 
     const React = require('react');
 
-    /** Slot the marker occupies: left end of the composer tool row. */
-    const SLOT = 'conversation.input.left';
+    /** Slot the marker occupies: right control cluster, before the submit action. */
+    const SLOT = 'conversation.input.right';
     /** Registration id, unique among the slot's list entries. */
     const ENTRY_ID = 'subagent-marker';
     /** Stylesheet key, keeping one tag across mounts. */
