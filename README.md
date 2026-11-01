@@ -1,64 +1,66 @@
 # dsh-subagent-marker
 
-**Marks the composer of a subagent session in DeepSeek Harness.**
+**给 DeepSeek Harness 子代理会话的输入框加标识。**
 
-A subagent session's composer looks exactly like a root session's. This plugin adds a `subagent` marker at the left end of the composer's tool row, so you can tell which one you are typing into.
+沟槽的 dsh UI 设计，一晚上好几次在查看 subagent 内容之后误输入 prompt 给 subagent，浪费数百 K token，一怒之下遂跑了这么个插件。
 
-[English](README.md) | [中文](README.zh.md)
+只加了个标签，其他什么都没干。大概不会影响其他插件。
 
-![The subagent marker in a subagent session's composer](https://raw.githubusercontent.com/wingoflan/dsh-subagent-marker/main/assets/screenshot.png)
+[English](https://github.com/wingoflan/dsh-subagent-marker/blob/main/README.en.md) | [中文](https://github.com/wingoflan/dsh-subagent-marker/blob/main/README.md)
 
-## What it does
+![子代理会话输入框右侧的 subagent 标识](https://raw.githubusercontent.com/wingoflan/dsh-subagent-marker/main/assets/screenshot.png)
 
-- Renders the marker only when the open session is a subagent. Root sessions get nothing, so the row keeps its original layout and spacing.
+## 功能
 
-One-shot subagents and subagents whose parent went offline get a read-only composer from DSH, which replaces the whole tool row. The marker does not appear there; those sessions cannot accept input anyway.
+- 只在当前会话是子代理时渲染标记。主会话不渲染任何东西，工具行保持原来的布局和间距。
 
-## Install
+一次性子代理和父会话离线的子代理，DSH 会用只读输入区替换整个工具行。标记在这两种会话里不出现，这两种会话本来也无法输入。
 
-Manually:
+## 安装
+
+手动安装：
 
 ```bash
 dsh plugin add dsh-subagent-marker
 ```
 
-From a local checkout:
+从本地目录安装：
 
 ```bash
 dsh plugin add link:/absolute/path/to/dsh-subagent-marker
 ```
 
-## Turning it off and on
+## 开关
 
-Installing applies the plugin's own `cordis.patch.yml`. To switch it off, add one override row to the profile's `cordis.patch.yml`:
+安装时会应用插件自带的 `cordis.patch.yml`。想关掉，往 profile 的 `cordis.patch.yml` 加一行覆盖：
 
 ```yaml
 - id: subagent-marker
   disabled: true
 ```
 
-The profile layer is applied after every bundle layer, and a patch without `insert` overrides the entry with that id — so this one row reaches the row the bundle inserted. Deleting it switches the marker back on.
+profile 层在所有 bundle 层之后应用，不带 `insert` 的补丁按 id 覆盖已有条目，所以这一行能改到 bundle 插入的那一行。删掉它就恢复显示。
 
-Do not repeat the `insert` block in the profile layer. Two entries with the same id both mount, and the marker would then register its slot entry twice.
+不要在 profile 层重复写 `insert` 段。同 id 的两个条目都会挂载，标记会注册两次。
 
-## Uninstall
+## 卸载
 
-Delete the override row from the profile's `cordis.patch.yml`, then:
+先删掉 profile `cordis.patch.yml` 里的覆盖行，再执行：
 
 ```bash
 dsh plugin remove dsh-subagent-marker
 ```
 
-## How it works
+## 实现
 
-The package has two halves. `index.js` is the Host half and exports an empty `apply()`. Everything visible lives in `client.js`, which the Host serves to the page because `package.json` declares `dsh.client` and exports `./client`.
+包分两半。`index.js` 是 Host 半部，只导出一个空的 `apply()`。看得见的东西全在 `client.js`：`package.json` 声明了 `dsh.client` 并导出 `./client`，Host 据此把它投递给页面。
 
-`client.js` registers one entry into the `conversation.input.left` slot — a list slot at the left end of the composer tool row, after the permission selector and the plan control. The component reads `subagent` from the session snapshot and returns `null` on a root session, so nothing is added to the DOM.
+`client.js` 往 `conversation.input.right` 槽注册一个条目。这个槽是 list 类型，位于输入框底部工具行右侧的控制区，在模型选择器旁边、停止和发送按钮之前。组件从会话快照取 `subagent`，主会话为 `null` 时返回 `null`，DOM 里不新增节点。
 
-## Development
+## 开发
 
-There is no build step. `exports["./client"]` points straight at `client.js`, so editing that file is editing what the browser receives. The first install needs a Host restart before the new package loads.
+没有构建步骤。`exports["./client"]` 直接指向 `client.js`，改这个文件就是改投递内容。首次安装后重启一次 Host 才会加载新包。
 
-## License
+## 许可证
 
 MIT
